@@ -20,8 +20,7 @@ try{
 
 }catch(e){
 
-// res.status(500).json({message:'email error'})
-console.log(`catch error ${e}`);
+ res.status(500).json({message:'email error'})
 
 }
 
