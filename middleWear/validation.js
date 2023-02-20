@@ -1,53 +1,57 @@
-
 const dataMethod=['body','query','params','file','headers']
+
 
 const validation=(schema)=>{
 
+try{
 
-
-return async(req,res,next)=>{
-
-
+    return async(req,res,next)=>{
 const validationErr=[]
-dataMethod.forEach(function(key){
+        dataMethod.forEach((key)=>{
+
+if(schema[key]){
 
 
-    if(schema[key]){
-    
-    
-    const validateRes=schema[key].validate(req[key],{abortEarly:false})
-    
-    if(validateRes.error){
-    
-        validationErr.push(validateRes.error.details)
- 
-    }
-    }
-    })
-    
-    if(validationErr.length){
+const validationRes=schema[key].validate(req[key],{abortEarly:false})
+
+if(validationRes.error){
+    validationErr.push(validationRes.error.details)
+}
+
+
+}
 
 
 
-        res.json({message:"error",validationErr})
-        
-        
-        }else{
-        
-        
-        next()
-        
-        
-        
-        }
-        
+        })
 
 
+if(validationErr.length>0){
 
+res.status(400).json({message:"validation err",validationErr})
+
+
+}else{
+
+
+next()
 
 }
 
 
 }
 
-module.exports = {validation}
+
+}catch(e){
+
+
+    res.status(500).json({message:"catch err",e})
+
+    
+}
+
+
+
+}
+
+module.exports ={validation}

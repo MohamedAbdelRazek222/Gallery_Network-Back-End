@@ -1,77 +1,76 @@
 
+
 const jwt=require('jsonwebtoken');
-const userModel = require('../DB/models/user.model');
-
 const roles={
+Admin:"admin",
+User:"user",
+Hr:"hr"
 
-    Admin:"admin",
-    User:"user",
-    Hr:"hr"
     
-
 }
-
-
+const { userModel } = require('../DB/model/user.model');
 const authen=(accessRoles)=>{
+
+
 
 
 return async(req,res,next)=>{
 
-try{
-
 const headerToken=req.headers.authorization;
 
+if( !headerToken.startsWith('Bearer ')){
 
-if(!headerToken.startsWith(`${process.env.BearerToken} `)){
+
+res.status(400).json({message:"invalid herader token"})
 
 
-    res.status(400).json({message:"invalid herader token"})
 
 }else{
 
 const token=headerToken.split(' ')[1]
-const decoded=jwt.verify(token,process.env.logingtoken)
-
+const decoded=jwt.verify(token,process.env.loginToken)
 
 if(!decoded || !decoded.isLogged){
-
 
     res.status(400).json({message:"invalid  token"})
 
 
 }else{
-console.log(decoded);
-const findUser=await userModel.findOne({_id:decoded._id}).select('role userName email')
-if(!findUser){
+
+const finduser=await userModel.findOne({_id:decoded._id}).select('role userName email')
+
+if(!finduser){
+
 
     res.status(404).json({message:"invalid  account id"})
 
 
+
 }else{
 
-    if(!accessRoles.includes(findUser.role)){
+if(!accessRoles.includes(finduser.role)){
 
-        res.status(401).json({message:"not authorized"})
-    
-    
-    }
-    req.user=findUser
-    next()
+    res.status(401).json({message:"not authorized"})
 
-}
-}
-}
-}catch(e){
-
-    console.log(e);
-res.json({message:"error",e})
 
 }
 
+req.user=finduser
+next()
 
 }
 
 }
 
 
-module.exports = {authen,roles}
+}
+
+
+}
+
+
+
+
+}
+
+module.exports ={authen,roles}

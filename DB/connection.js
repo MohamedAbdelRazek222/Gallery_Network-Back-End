@@ -10,4 +10,4 @@ return mongoose.connect(process.env.connect).then((res)=>{console.log("connected
 
 }
 
-module.exports = connectDB
+module.exports = {connectDB}

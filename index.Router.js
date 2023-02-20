@@ -1,9 +1,12 @@
-const userRouter=require('./modules/user/user.router')
-const productRouter=require('./modules/product/product.router')
-const commentRouter=require('./modules/comment/comment.router')
+const  userRouter=require('./modules/user/user.router')
+const authRouter=require('./modules/auth/auth.router')
+const postRouter=require('./modules/post/post.router')
+const adminRouter=require('./modules/admin/admin.router')
 
 
 
 
 
-module.exports = {userRouter,productRouter,commentRouter}
+
+
+module.exports = {userRouter,authRouter,postRouter,adminRouter}
