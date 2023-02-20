@@ -1,19 +1,4 @@
-/*1
-*** user posts report هنعمل 3 جداول****
-***report:report  دا مثلا لو حد بينزل محتوي سئ تعمل فيه  ****
-*********************************************
-***محتوي الجداول****
--user:userName,email,fname,password,phone,age,gender(defualt male),confirm,role,profilePic,coverPic,socialLinks,gallery,story,follower,accountStatus,pdfLink
--posts:title,desc,image,userId(objectId,ref:user),tags:array,like:array,replay,isBlocked***
--report:type:String,reporter:objectId user,accountId:objectId user,postId:objectId post,message,status:boolean
-***********************************************
 
-
-
-
-
-
-*/
 require('dotenv').config()
 const express = require('express')
 const { connectDB } = require('./DB/connection')
