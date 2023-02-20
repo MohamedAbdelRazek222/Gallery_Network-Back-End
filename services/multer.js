@@ -72,7 +72,7 @@ cb(null,false)
 
 
       
-      const upload = multer({ dest:fullPath/*,limits:{fileSize:62525}*/,fileFilter,storage })
+      const upload = multer({ dest:fullPath,limits:{fileSize:62525,fileFilter,storage })
 
     
     return upload
