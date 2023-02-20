@@ -42,7 +42,6 @@ res.status(404).json({message:"Invalid post id"})
 }else{
 
     const comment=await commentModel.findOne({_id:commentId,postId:findPost._id})
-// if(!findPost.comments.includes(commentId)){
 if(!comment){
 
 
@@ -88,52 +87,7 @@ const unlikeCommnet=async(req, res)=>{
     }
 
 
-    // --------------------------------------------------
 
-// const replyOnReplayOnComment=async(req,res) => {
-
-//     const {text}=req.body
-//    const {id,commentId}=req.params
-//    const {_id}=req.user
-   
-   
-   
-//    const findPost=await postModel.findOne({_id:id})
-//    if(!findPost){
-   
-//    res.status(404).json({message:"Invalid post id"})
-   
-   
-//    }else{
-   
-//    if(!findPost.comments.includes(commentId)){
-   
-   
-   
-   
-//        res.status(200).json({message:"invalid replay comment id"})
-   
-//    }else{
-
-
-
-//     const newComment=new commentModel({text,createdBy:_id,postId:findPost._id})
-//     const saveComment=await newComment.save()
-//     await commentModel.findByIdAndUpdate({_id:commentId},{$push:{replay:saveComment._id}})
-//     res.status(200).json({message:"Done",saveComment})
-
-
-
-
-
-//    }
-   
-   
-   
-//    }
-   
-   
-//    }
 
 
 module.exports = {createcomment,replyOnComment,likeCommmet,unlikeCommnet}
