@@ -32,19 +32,7 @@ res.status(200).json({message:"done",savePost})
 }
 // ---------------------------------------------------------------------------
 
-// const displayAllPost=async(req, res)=>{
 
-// const post=[]
-// const cursor = postModel.find({}).cursor()
-// for(let doc=await cursor.next();doc!=null;doc=await cursor.next()){
-
-// console.log(doc);
-// const comment=await commentModel.find({postId:doc._id})
-// post.push({post:doc,comment})
-// }
-
-// res.status(200).json({message:"done",post})
-// }
 const displayAllPost=async(req, res)=>{
 
 const post = await postModel.find({}).populate([
@@ -125,23 +113,6 @@ path:'likes'
 res.status(200).json({message:"done",post})
 }
 
-
-
-
-
-// const likePost=async(req, res)=>{
-
-//     const post=await postModel.findOne({_id:req.params.id})
-// if(!post){
-
-//     res.status(400).json(({message:"invalid post id"}))
-// }else{
-// await postModel.findByIdAndUpdate(post._id,{$push:{likes:req.user._id}})
-
-// res.status(200).json({message:"done"})
-// }
-
-// }
 const likePost=async(req, res)=>{
 
 
