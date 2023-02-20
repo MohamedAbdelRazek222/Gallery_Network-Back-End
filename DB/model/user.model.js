@@ -122,13 +122,12 @@ next()
 
 })
 
-//version دا هنا بيغيرال 
+
 
 userSchema.pre('findOneAndUpdate',async function (next){
 
-console.log({model:this.model});//user  اسم الموديل الي هو هنا 
-console.log({Query:this.getQuery()});//  id وهنا انت بتدور بايه وهنا انت بتدور بال
-
+console.log({model:this.model});
+console.log({Query:this.getQuery()});
 const hookData=await this.model.findOne(this.getQuery()).select("__v")
 console.log(hookData);
 this.set({__v:hookData.__v+1})
